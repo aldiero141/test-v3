@@ -39,16 +39,17 @@ import ATodoStatus from '../Atoms/ATodoStatus.vue'
 import { storeToRefs } from 'pinia'
 import { useTodosStore } from '@/stores/todos'
 import type { ITask } from '@/models/task'
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 
 // const { loginUser: email, passwordUser: password } = storeToRefs(todosStore)
 const todosStore = useTodosStore()
 const { filter: filter } = storeToRefs(todosStore)
 
-let todos: Array<ITask> = todosStore.todos
+let todos = ref<Array<ITask>>(todosStore.todos)
 
 watch(filter, (newValue, oldValue) => {
-  if (newValue == 'completed') todos = todosStore.getCompleted
-  if (newValue == 'uncompleted') todos = todosStore.getUncompleted
+  if (newValue == 'completed') todos.value = todosStore.getCompleted
+  if (newValue == 'uncompleted') todos.value = todosStore.getUncompleted
+  if (newValue == '') todos.value = todosStore.todos
 })
 </script>
