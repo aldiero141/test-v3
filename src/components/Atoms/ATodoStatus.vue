@@ -1,6 +1,6 @@
 <template>
   <button
-    class="flex justify-center items-center rounded bg-white w-[8em] h-[2em]"
+    class="flex justify-center items-center rounded w-[8em] h-[2em]"
     :class="{
       'bg-red-600': status == 'uncompleted',
       'bg-green-600': status == 'completed'

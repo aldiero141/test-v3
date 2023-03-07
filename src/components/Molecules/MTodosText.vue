@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <ACard class="flex flex-col p-2 mb-4">
     <div class="flex flex-row mb-2" v-for="(todo, index) in todos" :key="index">
       <div class="text flex flex-row w-full items-center ml-2">
         <!-- <ALabel class="mr-2" id="number">
@@ -21,30 +21,34 @@
           :status="todo.status"
           @on:change="todosStore.setStatus(index, $event)"
         />
-        <AButton class="" danger :disabled="todo.removable" @on:click="todosStore.removeTodo(index)"
-          >X</AButton
-        >
+        <AButton danger :disabled="!todo.removable" @on:click="todosStore.removeTodo(index)"
+          >X
+        </AButton>
       </div>
     </div>
-  </div>
+  </ACard>
 </template>
 
 <script setup lang="ts">
-import ACheckbox from '../Atoms/ACheckbox.vue'
 import AText from '../Atoms/AText.vue'
 import AButton from '../Atoms/AButton.vue'
-// import ALabel from '../Atoms/ALabel.vue'
-import { useTodosStore } from '@/stores/todos'
+import ACard from '../Atoms/ACard.vue'
 import ATodoStatus from '../Atoms/ATodoStatus.vue'
-// import { storeToRefs } from 'pinia'
-
-interface ITask {
-  text: string
-  status: string
-  removable: boolean
-}
+// import ACheckbox from '../Atoms/ACheckbox.vue'
+// import ALabel from '../Atoms/ALabel.vue'
+import { storeToRefs } from 'pinia'
+import { useTodosStore } from '@/stores/todos'
+import type { ITask } from '@/models/task'
+import { watch } from 'vue'
 
 // const { loginUser: email, passwordUser: password } = storeToRefs(todosStore)
 const todosStore = useTodosStore()
-const todos: Array<ITask> = todosStore.todos
+const { filter: filter } = storeToRefs(todosStore)
+
+let todos: Array<ITask> = todosStore.todos
+
+watch(filter, (newValue, oldValue) => {
+  if (newValue == 'completed') todos = todosStore.getCompleted
+  if (newValue == 'uncompleted') todos = todosStore.getUncompleted
+})
 </script>

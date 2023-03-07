@@ -1,19 +1,21 @@
 <template>
-  <div class="flex flex-row w-full">
+  <ACard class="flex flex-row p-2 mb-4">
     <ALabel>
       {{ text }}
     </ALabel>
     <AInput class="mr-2" v-model="todo" :placeholder="placeholder" />
     <AButton class="mr-2" @on:click="addTask"> Add </AButton>
-  </div>
+  </ACard>
 </template>
 
 <script setup lang="ts">
 import AInput from '../Atoms/AInput.vue'
 import ALabel from '../Atoms/ALabel.vue'
 import AButton from '../Atoms/AButton.vue'
+import ACard from '../Atoms/ACard.vue'
 import { ref } from 'vue'
 import { useTodosStore } from '@/stores/todos'
+import type { ITask } from '@/models/task'
 
 defineProps({
   text: { type: String, default: '' },
@@ -21,11 +23,6 @@ defineProps({
 })
 
 const todo = ref('')
-interface ITask {
-  text: string
-  status: string
-  removable: boolean
-}
 const todosStore = useTodosStore()
 function addTask(): void {
   const task: ITask = {

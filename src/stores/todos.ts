@@ -1,23 +1,24 @@
-import { ref, computed, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-
-interface ITask {
-  text: string
-  status: string
-  removable: boolean
-}
+import type { ITask } from '@/models/task'
 
 export const useTodosStore = defineStore('todos', () => {
-  const todos: Array<ITask> = reactive([
+  const todos = ref<Array<ITask>>([
     {
       text: 'Mandi',
       status: 'completed',
-      removable: false
+      removable: true
     },
+
     {
       text: 'Makan',
       status: 'uncompleted',
       removable: false
+    },
+    {
+      text: 'Bersih Bersih',
+      status: 'completed',
+      removable: true
     },
     {
       text: 'Cuci Baju',
@@ -25,21 +26,45 @@ export const useTodosStore = defineStore('todos', () => {
       removable: false
     }
   ])
+  const filter = ref('')
 
-  const getTodos = computed(() => todos.values)
+  const getTodos = computed(() => todos.value)
+  const getCompleted = computed(() => todos.value.filter((a) => a.status == 'completed'))
+  const getUncompleted = computed(() => todos.value.filter((a) => a.status == 'uncompleted'))
 
   function addTodo(todo: ITask) {
-    todos.push(todo)
+    todos.value.push(todo)
   }
   function removeTodo(index: number) {
-    todos.splice(index, 1)
+    todos.value.splice(index, 1)
   }
 
   function setStatus(index: number, value: unknown) {
-    if (value) todos[index].status = 'completed'
-    if (!value) todos[index].status = 'uncompleted'
-    // console.log(this.todos)
+    if (value) {
+      todos.value[index].status = 'completed'
+      todos.value[index].removable = true
+      return
+    }
+    if (!value) {
+      todos.value[index].status = 'uncompleted'
+      todos.value[index].removable = false
+      return
+    }
   }
 
-  return { todos, getTodos, addTodo, removeTodo, setStatus }
+  function setFilter(value: string) {
+    filter.value = value
+  }
+
+  return {
+    todos,
+    filter,
+    getTodos,
+    getCompleted,
+    getUncompleted,
+    addTodo,
+    removeTodo,
+    setStatus,
+    setFilter
+  }
 })

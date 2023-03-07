@@ -1,14 +1,8 @@
 <template>
   <div class="flex flex-col justify-center items-center">
-    <ACard class="flex flex-row p-2 mb-4">
-      <MTodosInput />
-    </ACard>
-    <ACard class="flex flex-col p-2 mb-4">
-      <MTodosText class="mr-2" />
-    </ACard>
-    <ACard class="flex flex-row p-2 mb-4">
-      <MTodosFIlter />
-    </ACard>
+    <MTodosInput />
+    <MTodosText class="mr-2" />
+    <MTodosFIlter />
   </div>
 </template>
 

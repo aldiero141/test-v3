@@ -1,10 +1,11 @@
 <template>
   <button
-    class="flex justify-center items-center button text-white rounded px-2 hover:bg-opacity-95 h-[2em] min-w-[2em]"
+    class="flex justify-center items-center rounded px-2 hover:bg-opacity-95 h-[2em] min-w-[2em]"
     :class="{
-      'bg-blue-600': !success && !danger,
-      'bg-red-600': danger,
-      'bg-green-600': success,
+      'text-white bg-gray-300': disabled,
+      'text-white bg-blue-600 ': !outlined && !success && !danger,
+      'text-white bg-red-600': !outlined && danger,
+      'text-white bg-green-600': !outlined && success,
       'text-green-600 bg-transparent border-2 border-green-600 hover:bg-green-50':
         outlined && success,
       'text-red-600 bg-transparent border-2 border-red-600 hover:bg-red-50': outlined && danger
