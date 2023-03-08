@@ -4,7 +4,6 @@
     <div class="flex flex-row items-center">
       <AButton success outlined class="mr-2" @on:click="setCompleted"> Completed </AButton>
       <AButton danger outlined class="mr-2" @on:click="setUncompleted"> Uncompleted </AButton>
-      <AButton success @on:click="resetFilter"> Reset </AButton>
     </div>
   </ACard>
 </template>
@@ -22,8 +21,5 @@ function setCompleted(): void {
 }
 function setUncompleted(): void {
   todosStore.setFilter('uncompleted')
-}
-function resetFilter(): void {
-  todosStore.setFilter('')
 }
 </script>

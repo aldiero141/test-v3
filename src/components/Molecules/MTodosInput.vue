@@ -3,7 +3,7 @@
     <ALabel>
       {{ text }}
     </ALabel>
-    <AInput class="mr-2" v-model="todo" :placeholder="placeholder" />
+    <AInput class="mr-2" v-model="todo" :placeholder="placeholder" @on:enter="addTask" />
     <AButton class="mr-2" @on:click="addTask"> Add </AButton>
   </ACard>
 </template>

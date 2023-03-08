@@ -5,13 +5,14 @@
       type="text"
       :placeholder="placeholder"
       :value="modelValue"
+      @keydown.enter="$emit('on:enter')"
       @input="inputModel"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'on:enter'])
 defineProps({
   placeholder: {
     type: String,
