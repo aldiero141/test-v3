@@ -64,11 +64,19 @@ export const useTodosStore = defineStore('todos', () => {
   }
 
   function addTodo(todo: ITask) {
-    todos.value.push(todo)
+    isLoading.value = true
+    setTimeout(() => {
+      todos.value.push(todo)
+      isLoading.value = false
+    }, 300)
   }
 
   function removeTodo(index: number) {
-    todos.value.splice(index, 1)
+    isLoading.value = true
+    setTimeout(() => {
+      todos.value.splice(index, 1)
+      isLoading.value = false
+    }, 300)
   }
 
   function setStatus(index: number, value: unknown) {
@@ -85,7 +93,11 @@ export const useTodosStore = defineStore('todos', () => {
   }
 
   function setFilter(value: string) {
-    filter.value = value
+    isLoading.value = true
+    setTimeout(() => {
+      filter.value = value
+      isLoading.value = false
+    }, 1000)
   }
 
   return {

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center min-h-[10em]">
+  <div class="flex items-center justify-center">
     <div class="dot-spinner">
       <div class="dot-spinner__dot"></div>
       <div class="dot-spinner__dot"></div>

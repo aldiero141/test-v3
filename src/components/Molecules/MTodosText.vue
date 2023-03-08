@@ -1,7 +1,7 @@
 <template>
   <ACard class="flex flex-col p-2 mb-4">
     <ALoading v-if="isLoading" />
-    <div class="flex flex-row mb-2" v-for="(todo, index) in todos" :key="index">
+    <div v-if="!isLoading" class="flex flex-row mb-2" v-for="(todo, index) in todos" :key="index">
       <div class="text flex flex-row w-full items-center ml-2">
         <AText>
           {{ todo.text }}
